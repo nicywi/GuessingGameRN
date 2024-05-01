@@ -56,6 +56,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   buttonContainer: {
-    flex: 1
+    flex: 1,
   }
 });
