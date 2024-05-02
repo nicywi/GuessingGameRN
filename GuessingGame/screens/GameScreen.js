@@ -6,12 +6,12 @@ import PrimaryButton from '../components/ui/PrimaryButton';
 import Title from '../components/ui/Title';
 
 function generateRandomBetween(min, max, exclude) {
-    const rndNum = Math.floor(Math.floor() * (max - min)) + min;
+    const rndNum = Math.floor(Math.random() * (max - min)) + min;
 
     if (rndNum === exclude) {
         return generateRandomBetween(min, max, exclude);
     } else {
-        rndNum;
+        return rndNum;
     }
 }
 
@@ -27,8 +27,8 @@ function GameScreen({ userNumber }) {
 
         if ((direction === 'lower' && currentGuess < userNumber) ||
             (direction === 'greater' && currentGuess > userNumber)) {
-            Alert.alert("Don't lie!", 'You know that his is wrong...', [
-                { text: 'Sorry', style: 'cancel' },
+            Alert.alert("Don't lie!", 'You know that this is wrong...', [
+                { text: 'Sorry!', style: 'cancel' },
             ]);
             return;
         }
