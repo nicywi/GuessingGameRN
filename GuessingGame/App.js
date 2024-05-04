@@ -5,8 +5,6 @@ import GameScreen from './screens/GameScreen';
 import GameOverScreen from './screens/GameOverScreen';
 import Colors from './constants/colors';
 import {useFonts} from 'expo-font';
-import * as SplashScreen from 'expo-splash-screen';
-
 
 import StartGameScreen from './screens/StartGameScreen';
 
@@ -19,8 +17,8 @@ export default function App() {
     'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf'),
   });
 
-  if(!fontsLoaded){
-    return <SplashScreen></SplashScreen>;
+  if (!fontsLoaded) {
+    return null; // Or a loading indicator
   }
 
   function pickedNumberHandler(pickedNumber) {
