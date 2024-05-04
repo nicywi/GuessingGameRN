@@ -54,7 +54,7 @@ function GameScreen({ userNumber, onGameOver }) {
         }
         const newRndNumber = generateRandomBetween(minBoundary, maxBoundary, currentGuess);
         setCurrentGuess(newRndNumber);
-        setCurrentGuess(prevGuessRounds => [newRndNumber,...prevGuessRounds]);
+        setGuessRounds(prevGuessRounds => [newRndNumber, ...prevGuessRounds]);
     }
 
     return (
@@ -78,6 +78,16 @@ function GameScreen({ userNumber, onGameOver }) {
             </Card>
             <View>
                 {/* {guessRounds.map(guessRound => <Text key={guessRound}>{guessRound}</Text>)} */}
+                <FlatList data={guessRounds} renderItem={(itemData) => {
+                    // itemData.index
+                    return (
+                        <View>
+                            <Text>{itemData.item}</Text>
+                        </View>
+                    );
+                    
+                }}
+                keyExtractor ={(item)=> item} />
             </View>
             <View>
             </View>
