@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { View, StyleSheet, Alert } from 'react-native';
-import {Ionicons} from '@expo/vector-icons';
+import { View, StyleSheet, Alert, Text, FlatList } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 import NumberContainer from '../components/game/NumberContainer';
 import PrimaryButton from '../components/ui/PrimaryButton';
@@ -25,12 +25,18 @@ function GameScreen({ userNumber, onGameOver }) {
 
     const initialGuess = generateRandomBetween(1, 100, userNumber);
     const [currentGuess, setCurrentGuess] = useState(initialGuess);
+    const [guessRounds, setGuessRounds] = useState([initialGuess]);
 
     useEffect(() => {
         if (currentGuess === userNumber) {
             onGameOver();
         }
     }, [currentGuess, userNumber, onGameOver]);
+
+    useEffect(() => {
+        minBoundary = 1;
+        maxBoundary = 100;
+    }, []);
 
     function nextGuessHandler(direction) { //lower or greater
 
@@ -48,6 +54,7 @@ function GameScreen({ userNumber, onGameOver }) {
         }
         const newRndNumber = generateRandomBetween(minBoundary, maxBoundary, currentGuess);
         setCurrentGuess(newRndNumber);
+        setCurrentGuess(prevGuessRounds => [newRndNumber,...prevGuessRounds]);
     }
 
     return (
@@ -56,19 +63,22 @@ function GameScreen({ userNumber, onGameOver }) {
             <NumberContainer>{currentGuess}</NumberContainer>
             <Card>
                 <InstructionText style={styles.instructionText}>Higher or lower?</InstructionText>
-                    <View style={styles.buttonsContainer}>
-                        <View style={styles.buttonContainer}>
-                            <PrimaryButton onPress={nextGuessHandler.bind(this, 'lower')}>
-                                <Ionicons name="remove-sharp" size={24} color="white"/>
-                                </PrimaryButton>
-                        </View>
-                        <View style={styles.buttonContainer}>
-                            <PrimaryButton onPress={nextGuessHandler.bind(this, 'greater')}>
-                            <Ionicons name="add-sharp" size={24} color="white"/>
-                            </PrimaryButton>
-                        </View>
+                <View style={styles.buttonsContainer}>
+                    <View style={styles.buttonContainer}>
+                        <PrimaryButton onPress={nextGuessHandler.bind(this, 'lower')}>
+                            <Ionicons name="remove-sharp" size={24} color="white" />
+                        </PrimaryButton>
                     </View>
+                    <View style={styles.buttonContainer}>
+                        <PrimaryButton onPress={nextGuessHandler.bind(this, 'greater')}>
+                            <Ionicons name="add-sharp" size={24} color="white" />
+                        </PrimaryButton>
+                    </View>
+                </View>
             </Card>
+            <View>
+                {/* {guessRounds.map(guessRound => <Text key={guessRound}>{guessRound}</Text>)} */}
+            </View>
             <View>
             </View>
         </View >
