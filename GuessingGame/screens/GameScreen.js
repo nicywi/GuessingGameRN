@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { View, StyleSheet, Alert, Text, FlatList, useWindowDimensions } from 'react-native';
+import { View, StyleSheet, Alert, Text, FlatList, useWindowDimensions, Dimensions } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 import NumberContainer from '../components/game/NumberContainer';
@@ -86,8 +86,7 @@ function GameScreen({ userNumber, onGameOver }) {
     if (width > 500) {
         content =
             <>
-                <InstructionText style={styles.instructionText}>Higher or lower?</InstructionText>
-                <View style={styles.buttonsContainerWide}>
+                            <View style={styles.buttonsContainerWide}>
                         <View style={styles.buttonContainer}>
                             <PrimaryButton onPress={nextGuessHandler.bind(this, 'lower')}>
                                 <Text>minus</Text>
@@ -130,6 +129,8 @@ function GameScreen({ userNumber, onGameOver }) {
 
 export default GameScreen;
 
+// const deviceHeight = Dimensions.get('window').height;
+
 const styles = StyleSheet.create({
     screen: {
         flex: 1,
@@ -150,6 +151,7 @@ const styles = StyleSheet.create({
         padding: 16,
     },
     buttonsContainerWide: {
-
+        flexDirection: 'row',
+        alignItems: 'center',
     },
 });
