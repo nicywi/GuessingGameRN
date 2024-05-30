@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { TextInput, View, StyleSheet, Alert } from 'react-native';
+import { TextInput, View, StyleSheet, Alert, useWindowDimensions, Dimensions } from 'react-native';
 import Colors from '../constants/colors';
 
 import PrimaryButton from '../components/ui/PrimaryButton';
@@ -10,6 +10,8 @@ import InstructionText from '../components/ui/InstructionText';
 
 function StartGameScreen({ onPickNumber }) {
   const [enteredNumber, setEnteredNumber] = useState('');
+
+  const {width, height} = useWindowDimensions();
 
   function numberInputHandler(enteredText) {
     setEnteredNumber(enteredText);
@@ -59,10 +61,12 @@ function StartGameScreen({ onPickNumber }) {
 
 export default StartGameScreen;
 
+const deviceHeight = Dimensions.get('window').height;
+
 const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,
-    marginTop: 100,
+    marginTop: deviceHeight < 400 ? 30 : 100,
     alignItems: 'center',
   },
   numberInput: {
